@@ -8,7 +8,7 @@ module ExceptionsToHipchat
       @room = options[:room] || raise("HipChat room is required")
       @color = options[:color] || :red
       @notify = options[:notify]
-      @user = (options[:user] || "Notifier")[0..15]
+      @user = (options[:user] || "Notifier")[0...14]
     end
 
     def call(env)
