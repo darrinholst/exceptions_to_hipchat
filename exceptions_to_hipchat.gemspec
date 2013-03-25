@@ -14,5 +14,5 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = ExceptionsToHipchat::VERSION
 
-  gem.add_dependency("hipchat", "~> 0.4.1")
+  gem.add_dependency("hipchat", "~> 0.8")
 end
