@@ -2,19 +2,20 @@ require 'hipchat'
 
 module ExceptionsToHipchat
   class Notifier
-    def initialize(app, options = {})
+    def initialize(app, options = {}, client = nil)
       @app = app
-      @client = HipChat::Client.new(options[:api_token] || raise("HipChat API token is required"))
+      @client = client || HipChat::Client.new(options[:api_token] || raise("HipChat API token is required"))
       @room = options[:room] || raise("HipChat room is required")
       @color = options[:color] || :red
       @notify = options[:notify]
       @user = (options[:user] || "Notifier")[0...14]
+      @ignore = options[:ignore]
     end
 
     def call(env)
       @app.call(env)
     rescue Exception => exception
-      send_to_hipchat exception
+      send_to_hipchat(exception) unless @ignore && @ignore.match(exception.to_s)
       raise exception
     end
 

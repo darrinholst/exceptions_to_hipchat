@@ -15,4 +15,5 @@ Gem::Specification.new do |gem|
   gem.version       = ExceptionsToHipchat::VERSION
 
   gem.add_dependency("hipchat", "~> 0.8")
+  gem.add_development_dependency("rspec", "~> 2.14.1")
 end
